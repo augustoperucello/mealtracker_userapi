@@ -4,10 +4,11 @@ import com.augusto.oauth2learning.Entities.User;
 import com.augusto.oauth2learning.Exceptions.CannotSaveResourceException;
 import com.augusto.oauth2learning.Exceptions.ResourceNotFoundException;
 import com.augusto.oauth2learning.Repository.UserRepository;
+import io.quarkus.agroal.DataSource;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
-import jdk.internal.loader.Resource;
 import org.hibernate.ResourceClosedException;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 import java.util.*;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@ApplicationScoped
 public class UserService {
 
     @Inject

@@ -5,6 +5,7 @@ import com.augusto.oauth2learning.Exceptions.ResourceNotFoundException;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
