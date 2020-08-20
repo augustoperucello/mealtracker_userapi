@@ -66,6 +66,7 @@ public class UserController {
 
     //Updating the user by UserID
 
+    @Transactional
     @Path("/users/{id}")
     @PUT
     public User updateUserById(
@@ -74,6 +75,7 @@ public class UserController {
             return userService.updateUserById(userId, userDetails);
         }
 
+        @Transactional
     @Path("/facebook/{fbid}")
     @PUT
     public User updateUserByFacebookId(
@@ -82,12 +84,14 @@ public class UserController {
         return userService.updateUserByFacebookId(facebookId, userDetails);
     }
 
+    @Transactional
     @Path("/users/{id}")
     @DELETE
     public Map<String, Boolean> deleteUser (@PathParam("id") Long userId) throws Exception {
         return userService.deleteAnUser(userId);
     }
 
+    @Transactional
     @Path("/facebook/{fbid}")
     @DELETE
     public Map<String, Boolean> deleteUserByFacebookId (@PathParam("fbid") Long facebookId) throws Exception {
