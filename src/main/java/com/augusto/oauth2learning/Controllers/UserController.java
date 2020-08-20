@@ -7,6 +7,7 @@ import com.augusto.oauth2learning.Service.UserService;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -56,6 +57,7 @@ public class UserController {
         return userService.getUserByFirstName(firstName);
     }
 
+    @Transactional
     @Path("/users")
     @POST
     public User createUser(User user) throws CannotSaveResourceException {
