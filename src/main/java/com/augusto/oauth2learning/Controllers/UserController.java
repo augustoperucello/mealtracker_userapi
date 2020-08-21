@@ -75,7 +75,7 @@ public class UserController {
             return userService.updateUserById(userId, userDetails);
         }
 
-        @Transactional
+    @Transactional
     @Path("/facebook/{fbid}")
     @PUT
     public User updateUserByFacebookId(
