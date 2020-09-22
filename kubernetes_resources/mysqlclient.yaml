@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: userapi-mysql2
+  labels:
+    app: mysql2
+spec:
+  selector:
+    matchLabels:
+      app: mysql2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql2
+    spec:
+      containers:
+        - image: mysql:latest
+          name: mysql2
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: perucello
+          ports:
+            - containerPort: 3306
+              name: mysql2

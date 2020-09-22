@@ -2,20 +2,13 @@ package com.augusto.oauth2learning.Service;
 
 import com.augusto.oauth2learning.Entities.User;
 import com.augusto.oauth2learning.Exceptions.CannotSaveResourceException;
-import com.augusto.oauth2learning.Exceptions.ResourceNotFoundException;
 import com.augusto.oauth2learning.Repository.UserRepository;
-import io.quarkus.agroal.DataSource;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
-import org.hibernate.ResourceClosedException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 import java.util.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 @ApplicationScoped
 public class UserService {
 
@@ -24,8 +17,8 @@ public class UserService {
 
     //Method responsible for updating an User By ID
     //It is not possible to change the ID, but you can use this method to change the facebookId
-    public User updateUserById(Long userId, User userDetails) throws ResourceNotFoundException, CannotSaveResourceException {
-        User user = userRepository.findByIdOptional(userId).orElseThrow(() -> new ResourceNotFoundException("User not found on :: "+ userId));
+    public User updateUserById(Long userId, User userDetails) throws NotFoundException, CannotSaveResourceException {
+        User user = userRepository.findByIdOptional(userId).orElseThrow(() -> new NotFoundException("Hello"));
         user.setEmail(userDetails.getEmail());
         user.setLastName(userDetails.getLastName());
         user.setFirstName(userDetails.getFirstName());
@@ -44,8 +37,8 @@ public class UserService {
 
     //Method responsible for updating an User By Facebook ID
     //It is not possible to change the ID.
-    public User updateUserByFacebookId(Long facebookId, User userDetails) throws ResourceNotFoundException, CannotSaveResourceException {
-        User user = userRepository.findByFacebookId(facebookId).orElseThrow(() -> new ResourceNotFoundException("User not found on :: " + facebookId));
+    public User updateUserByFacebookId(Long facebookId, User userDetails) throws NotFoundException, CannotSaveResourceException {
+        User user = userRepository.findByFacebookId(facebookId).orElseThrow(() -> new NotFoundException("User not found with this FacebookID :: " + facebookId));
         user.setEmail(userDetails.getEmail());
         user.setLastName(userDetails.getLastName());
         user.setFirstName(userDetails.getFirstName());
@@ -65,18 +58,18 @@ public class UserService {
         return userRepository.findAllUsers();
     }
 
-    public User getUserByFacebookId(Long facebookId) throws ResourceNotFoundException{
-        User user = userRepository.findByFacebookId(facebookId).orElseThrow(() -> new ResourceNotFoundException ("user not found on :: " + facebookId));
+    public User getUserByFacebookId(Long facebookId) throws NotFoundException{
+        User user = userRepository.findByFacebookId(facebookId).orElseThrow(() -> new NotFoundException ("user not found on :: " + facebookId));
         return user;
     }
 
-    public User getUserById(Long Id) throws ResourceNotFoundException{
-        User user = userRepository.findByIdOptional(Id).orElseThrow(() -> new ResourceNotFoundException ("user not found on :: " + Id));
+    public User getUserById(Long Id) throws NotFoundException{
+        User user = userRepository.findByIdOptional(Id).orElseThrow(() -> new NotFoundException ("user not found on :: " + Id));
         return user;
     }
 
-    public User getUserByFirstName(String firstName) throws ResourceNotFoundException{
-        User user = userRepository.findByFirstName(firstName).orElseThrow(() -> new ResourceNotFoundException ("user not found on :: " + firstName));
+    public User getUserByFirstName(String firstName) throws NotFoundException{
+        User user = userRepository.findByFirstName(firstName).orElseThrow(() -> new NotFoundException ("user not found on :: " + firstName));
         return user;
     }
 
@@ -91,16 +84,16 @@ public class UserService {
         }
     }
 
-    public Map<String, Boolean> deleteAnUser(Long userId)throws ResourceNotFoundException{
-        User user = userRepository.findByIdOptional(userId).orElseThrow(() -> new ResourceNotFoundException("User not found on ::" + userId));
+    public Map<String, Boolean> deleteAnUser(Long userId)throws NotFoundException{
+        User user = userRepository.findByIdOptional(userId).orElseThrow(() -> new NotFoundException("User not found on ::" + userId));
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     }
 
-    public Map<String, Boolean> deleteAnUserByFacebookId(Long facebookId) throws ResourceNotFoundException{
-        User user = userRepository.findByFacebookId(facebookId).orElseThrow(() -> new ResourceNotFoundException("User not found on ::" + facebookId));
+    public Map<String, Boolean> deleteAnUserByFacebookId(Long facebookId) throws NotFoundException{
+        User user = userRepository.findByFacebookId(facebookId).orElseThrow(() -> new NotFoundException("User not found on ::" + facebookId));
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

@@ -1,7 +1,5 @@
 package com.augusto.oauth2learning.Entities;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.persistence.*;
 import java.util.Date;
 

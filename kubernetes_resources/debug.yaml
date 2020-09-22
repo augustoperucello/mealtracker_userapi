@@ -1,0 +1,20 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: debug
+  labels:
+    app: debug
+spec:
+  selector:
+    matchLabels:
+      app: debug
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: debug
+    spec:
+      containers:
+        - name: debug
+          image: praqma/network-multitool
