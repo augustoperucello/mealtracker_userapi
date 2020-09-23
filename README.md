@@ -1,7 +1,11 @@
-# mealtracker_userapi
+# Mealtracker
 
-API Backend para cadastrar usuários na solução Mealtracker.
+Solução API Quarkus para o projeto Mealtracker - Gestão de refeições de um usuário.
 
-Consturído em Quarkus, usando banco de dados Mysql.
+API responsável por fazer gestão de usuários (CRUD).
 
-Deployment em Kubernetes, conexão com o banco, services, deployment e ingresses na pasta kubernetes_resources.
+Contrato API:
+
+Arquitetura completa da solução:
+
+![alt text](https://github.com/augustoperucello/mealtracker/blob/master/23-set.png?raw=true)
